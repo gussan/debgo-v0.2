@@ -25,6 +25,7 @@ import (
 	"io/ioutil"
 	"log"
 	"strings"
+	"path"
 )
 
 type DebReader struct {
@@ -197,7 +198,7 @@ func DebParseMetadata(rdr io.Reader) (*Package, error) {
 				if err != nil {
 					return nil, err
 				}
-				if thdr.Name == "control" {
+				if path.Base(thdr.Name) == "control" {
 					hasControlFile = true
 					dscr := NewDscReader(tgzr)
 					pkg, err = dscr.Parse()
