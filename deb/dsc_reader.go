@@ -48,7 +48,9 @@ func (dscr *DscReader) Parse() (*Package, error) {
 		if strings.Contains(line, ":") {
 			res := strings.SplitN(line, ":", 2)
 			log.Printf("Control File entry: '%s': %s", res[0], res[1])
-			pkg.SetField(res[0], res[1])
+			key := strings.Trim(res[0], "\n ")
+			value := strings.Trim(res[1], "\n ")
+			pkg.SetField(key, value)
 		} else {
 
 		}
@@ -56,4 +58,3 @@ func (dscr *DscReader) Parse() (*Package, error) {
 	return pkg, nil
 
 }
-
